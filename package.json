@@ -31,7 +31,7 @@
     "prompts": "^2.4.2"
   },
   "devDependencies": {
-    "@appril/core": "^0.2.0",
+    "@appril/core": "^0.2.1",
     "@appril/dbx": "^0.2.0",
     "@appril/dev": "^0.2.0",
     "@appril/more": "^0.2.0",
