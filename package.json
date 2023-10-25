@@ -1,0 +1,51 @@
+{
+  "name": "@appril/create",
+  "version": "0.2.0",
+  "description": "Easily bootstrap Appril projects",
+  "author": "Slee Woo",
+  "license": "MIT",
+  "engines": {
+    "node": "20.8",
+    "npm": "10"
+  },
+  "files": [
+    "pkg/*"
+  ],
+  "bin": {
+    "create": "pkg/index.js"
+  },
+  "scripts": {
+    "// ✨ build": "",
+    "prebuild": "rsync -av --delete --exclude '/*.ts' --exclude '/presets/*.ts' lib/ pkg",
+    "build": "esbundler lib/index.ts --sourcemap=inline --outdir=pkg",
+    "postbuild": "chmod +x pkg/index.js",
+    "// ✨ publish": "",
+    "prepub": "npm run build",
+    "pub": "npm pub"
+  },
+  "dependencies": {
+    "fs-extra": "^11.1.1",
+    "merge": "^2.1.1",
+    "mustache": "^4.2.0",
+    "npm-check-updates": "^16.14.6",
+    "prompts": "^2.4.2"
+  },
+  "devDependencies": {
+    "@appril/core": "^0.2.0",
+    "@appril/dbx": "^0.2.0",
+    "@appril/dev": "^0.2.0",
+    "@appril/more": "^0.2.0",
+    "@appril/scripts": "^0.2.0",
+    "@types/fs-extra": "^11.0.3",
+    "@types/koa__router": "^12.0.2",
+    "@types/mustache": "^4.2.4",
+    "@types/node": "^20.8.8",
+    "@types/prompts": "^2.4.7",
+    "@types/qs": "^6.9.9",
+    "esbuild": "^0.19.5",
+    "pinia": "^2.1.7",
+    "typescript": "^5.2.2",
+    "vite": "^4.5.0",
+    "vue-router": "^4.2.5"
+  }
+}

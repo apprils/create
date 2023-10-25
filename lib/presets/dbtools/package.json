@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@appril/dbx": "^0.0.0",
+    "knex": "^0.0.0"
+  }
+}
+

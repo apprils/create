@@ -1,0 +1,22 @@
+{
+  "scripts": {
+    "dev": "client-watcher --port {{devServerPort}} --strict-port",
+    "api": "api-watcher -p {{apiPort}}",
+    "build:client": "client-builder",
+    "build:api": "api-builder",
+    "build": "npm run build:client && npm run build:api",
+    "//✨ trailing comma": ","
+  },
+  "nodemonConfig": {
+    "spawn": true,
+    "delay": 1,
+    "ext": "ts,js,json",
+    "watch": [
+      ".",
+      "../*.ts",
+      "../config",
+      "../helpers",
+      "../package.json"
+    ]
+  }
+}

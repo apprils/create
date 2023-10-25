@@ -1,0 +1,8 @@
+{
+  "extends": "@appril/dev/tsconfig.lib.json",
+  "include": [
+    "./index.ts",
+    "./render.ts",
+    "./presets/*.ts"
+  ]
+}

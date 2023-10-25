@@ -1,0 +1,27 @@
+{
+
+  "extends": "@appril/dev/tsconfig.src.json",
+
+  "include": [
+    "../env.d.ts",
+    "**/*",
+    "**/*.vue",
+    "./router/_routes.d.ts"
+  ],
+
+  "compilerOptions": {
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "~/*": [ "../*" ],
+      {{#aliases}}
+      "{{src}}/*": [ "{{dst}}/*" ],
+      {{/aliases}}
+      "@/*": [ "./*" ]
+    },
+    "types": [
+      "koa-bodyparser"
+    ]
+  }
+}
+
