@@ -25,28 +25,29 @@
     "postpub": "mkdir -p var/pub; npm pack --pack-destination var/pub"
   },
   "dependencies": {
-    "fs-extra": "^11.1.1",
+    "fs-extra": "^11.2.0",
     "merge": "^2.1.1",
     "mustache": "^4.2.0",
-    "npm-check-updates": "^16.14.6",
+    "npm-check-updates": "^16.14.12",
     "prompts": "^2.4.2"
   },
   "devDependencies": {
-    "@appril/core": "^0.2.3",
+    "@appril/core": "^0.2.6",
     "@appril/dbx": "^0.2.3",
     "@appril/dev": "^0.2.2",
-    "@appril/more": "^0.2.3",
+    "@appril/more": "^0.2.4",
     "@appril/scripts": "^0.2.2",
     "@types/fs-extra": "^11.0.4",
     "@types/koa__router": "^12.0.4",
     "@types/mustache": "^4.2.5",
-    "@types/node": "^20.9.0",
-    "@types/prompts": "^2.4.8",
-    "@types/qs": "^6.9.10",
-    "esbuild": "^0.19.5",
+    "@types/node": "^20.10.5",
+    "@types/prompts": "^2.4.9",
+    "@types/qs": "^6.9.11",
+    "esbuild": "^0.19.10",
     "pinia": "^2.1.7",
-    "typescript": "^5.2.2",
-    "vite": "^4.5.0",
+    "release-it": "^17.0.1",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.10",
     "vue-router": "^4.2.5"
   }
 }
