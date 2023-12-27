@@ -6,7 +6,7 @@
     "../env.d.ts",
     "**/*",
     "**/*.vue",
-    "./router/_routes.d.ts"
+    "**/*.d.ts"
   ],
 
   "compilerOptions": {

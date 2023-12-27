@@ -9,7 +9,8 @@
   },
   "nodemonConfig": {
     "spawn": true,
-    "delay": 1,
+    "//✨ nodemon delay": "give HMR updates enough time to perform",
+    "delay": 1200,
     "ext": "ts,js,json",
     "watch": [
       ".",
