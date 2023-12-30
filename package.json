@@ -18,11 +18,13 @@
     "// ✨ build": "",
     "prebuild": "rsync -av --delete --exclude '/*.ts' --exclude '/presets/*.ts' lib/ pkg",
     "build": "esbundler lib/index.ts --sourcemap=inline --outdir=pkg",
-    "postbuild": "chmod +x pkg/index.js",
-    "// ✨ publish": "",
-    "prepub": "npm run build",
-    "pub": "npm pub",
-    "postpub": "mkdir -p var/pub; npm pack --pack-destination var/pub"
+    "postbuild": "chmod +x pkg/index.js"
+  },
+  "release-it": {
+    "hooks": {
+      "before:init": [ "npm run build" ],
+      "after:release": [ "mkdir -p var/pub", "npm pack --pack-destination var/pub" ]
+    }
   },
   "dependencies": {
     "fs-extra": "^11.2.0",
