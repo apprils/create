@@ -23,7 +23,6 @@
     "@vitejs/plugin-vue": "^0.0.0",
     "@vue/tsconfig": "^0.0.0",
     "esbuild": "^0.0.0",
-    "nodemon": "^0.0.0",
     "pinia": "^0.0.0",
     "tslib": "^0.0.0",
     "typescript": "^0.0.0",
@@ -34,6 +33,6 @@
     "vue-tsc": "^0.0.0"
   },
   "scripts": {
-    "//✨ trailing comma": ","
+    "//✨ trailing entry": ""
   }
 }
