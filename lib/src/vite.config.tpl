@@ -11,8 +11,10 @@ import {
   vitePluginDefine,
 } from "@appril/dev";
 
+import esbuildConfig from "../esbuild.config";
 import { baseurl } from "./config";
 import { distDir } from "../package.json";
+import { devPort } from "./package.json";
 
 export default defineConfig(() => {
 
@@ -21,12 +23,21 @@ export default defineConfig(() => {
     base: join(baseurl, "/"),
 
     build: {
-      outDir: resolve(__dirname, join("..", distDir, basename(__dirname), "client")),
+      outDir: resolve(__dirname, join("..", distDir, basename(__dirname))),
       emptyOutDir: true,
       sourcemap: true,
     },
 
-    cacheDir: `../var/.cache/vite/${ basename(__dirname) }/client`,
+    server: {
+      host: true,
+      port: devPort,
+      strictPort: true,
+      fs: {
+        strict: false,
+      },
+    },
+
+    cacheDir: `../var/.cache/vite/${ basename(__dirname) }`,
 
     plugins: [
 
@@ -38,7 +49,9 @@ export default defineConfig(() => {
 
       vitePluginApprilViews(),
 
-      vitePluginApprilApi(),
+      vitePluginApprilApi({
+        esbuildConfig,
+      }),
 
       vitePluginDefine([
         {
@@ -56,12 +69,6 @@ export default defineConfig(() => {
         "{{src}}": resolve(__dirname, "{{dst}}"),
         {{/aliases}}
       }
-    },
-
-    server: {
-      fs: {
-        strict: false,
-      },
     },
 
   }
