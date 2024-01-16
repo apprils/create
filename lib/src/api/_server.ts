@@ -19,7 +19,7 @@ if (!port && !sock) {
   throw new Error("Please provide either --port/-p number or --sock/-s path")
 }
 
-process.stdout.write(`\n\tStarting server [ ${ port ? "port" : "socket" }: ${ port || sock } ]... `)
+process.stdout.write(`\n\tStarting Server [ ${ port ? "port" : "socket" }: ${ port || sock } ]... `)
 
 if (sock) {
   try { unlinkSync(sock) } catch(e) {}
@@ -31,7 +31,7 @@ app.listen(port || sock, function() {
     chmodSync(sock, 0o777)
   }
 
-  console.log("✨ Done\n")
+  console.log("\n\t✨ Server Started\n")
 
 })
 
