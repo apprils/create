@@ -7,7 +7,7 @@ import { bodyparser } from "@appril/core/bodyparser";
 
 export * from "@appril/core/router";
 
-export const passthrough: Middleware = (env, next) => next()
+export const passthrough: Middleware = (_ctx, next) => next()
 
 export const useJsonBodyparser = (opts: JsonOptions = {}) => {
   return use([ "post", "put", "patch" ], [ { bodyparser: bodyparser.json(opts) } ])
