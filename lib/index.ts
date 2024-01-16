@@ -167,9 +167,9 @@ async function init() {
     prefix: dstdir(),
     format: [ "group" ],
     upgrade: true,
-    silent: false,
+    silent: true,
     interactive: false,
-  }, { cli: true })
+  })
 
   const port = {
     value: project.devPort - 2,
