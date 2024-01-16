@@ -115,7 +115,7 @@ async function init() {
 
     {
       type: "number",
-      name: "devServerPort",
+      name: "devPort",
       message: "Dev Server Port",
       initial: 4000,
       onState,
@@ -172,7 +172,7 @@ async function init() {
   }, { cli: true })
 
   const port = {
-    value: project.devServerPort - 2,
+    value: project.devPort - 2,
     get next() { return this.value += 2 },
   }
 
@@ -182,6 +182,7 @@ async function init() {
 
     for (
       const [ a, b ] of [
+        [ "package.tpl", "package.json" ],
         [ "tsconfig.tpl", "tsconfig.json" ],
         [ "vite.config.tpl", "vite.config.ts" ],
       ]
@@ -189,7 +190,7 @@ async function init() {
       await fsx.move(dstdir(dir, a), dstdir(dir, b))
     }
 
-    const devServerPort = port.next
+    const devPort = port.next
     const apiPort = port.next
 
     const aliases = project.sourceFolders.map((src: string) => ({
@@ -214,7 +215,7 @@ async function init() {
 
       const context = {
         project,
-        devServerPort,
+        devPort,
         apiPort,
         aliases,
         src: {
