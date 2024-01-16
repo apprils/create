@@ -8,6 +8,7 @@ import { bodyparser } from "@appril/core/bodyparser";
 import { baseurl, apiurl } from "../config";
 import routes from "./_routes";
 
+// default bodyparser
 config.use([ "post", "put", "patch" ], [ { bodyparser: bodyparser.json() } ])
 
 export const router = new Router({
@@ -18,6 +19,9 @@ for (const { name, path, method, middleware } of routeMapper(routes)) {
   router.register(path, [ method ], [ ...middleware, () => true ], { name })
 }
 
-debug(console.log)
+if (/api/.test(process.env.DEBUG!)) {
+  debug(console.log)
+}
+
 warnings(console.warn)
 
