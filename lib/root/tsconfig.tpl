@@ -12,7 +12,7 @@
     {{#project.sourceFolders}}
     "{{.}}",
     {{/project.sourceFolders}}
-    "node_modules"
+    "var"
   ],
 
   "compilerOptions": {
