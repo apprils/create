@@ -1,6 +1,6 @@
 {
 
-  "extends": "@appril/dev/tsconfig.app.json",
+  "extends": "@appril/tsconfig/app.json",
 
   "include": [
     "**/*.d.ts",

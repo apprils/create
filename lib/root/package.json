@@ -15,6 +15,7 @@
   },
   "devDependencies": {
     "@appril/dev": "^0.0.0",
+    "@appril/tsconfig": "^0.0.0",
     "@types/koa": "^0.0.0",
     "@types/koa__router": "^0.0.0",
     "@types/koa-bodyparser": "^0.0.0",

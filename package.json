@@ -16,9 +16,9 @@
   },
   "scripts": {
     "// ✨ build": "",
-    "esbundler": "func() { e=$1; shift; esbuild $e --bundle --platform=node --target=node20 --packages=external --sourcemap=inline --loader:.tpl=text $*; }; func",
+    "esbundler": "func() { e=$1; shift; esbuild $e --bundle --platform=node --target=node20 --packages=external --loader:.tpl=text $*; }; func",
     "prebuild": "rsync -av --delete --exclude '/*.ts' --exclude '/presets/*.ts' lib/ pkg",
-    "build": "npm run esbundler -- lib/index.ts --outdir=pkg",
+    "build": "npm run esbundler -- lib/index.ts --sourcemap=inline --outdir=pkg",
     "postbuild": "chmod +x pkg/index.js"
   },
   "release-it": {
@@ -40,22 +40,21 @@
     "prompts": "^2.4.2"
   },
   "devDependencies": {
-    "@appril/core": "^0.2.7",
-    "@appril/dbx": "^0.2.5",
-    "@appril/dev": "^0.2.4",
+    "@appril/core": "^0.2.8",
+    "@appril/dbx": "^0.2.6",
     "@appril/more": "^0.2.5",
+    "@appril/tsconfig": "^0.2.2",
     "@types/fs-extra": "^11.0.4",
     "@types/koa__router": "^12.0.4",
     "@types/mustache": "^4.2.5",
-    "@types/node": "^20.11.4",
+    "@types/node": "^20.11.5",
     "@types/nopt": "^3.0.32",
     "@types/prompts": "^2.4.9",
     "@types/qs": "^6.9.11",
     "esbuild": "^0.19.11",
     "pinia": "^2.1.7",
     "release-it": "^17.0.1",
-    "typescript": "^5.3.3",
-    "vite": "^5.0.11",
+    "vite": "^5.0.12",
     "vue-router": "^4.2.5"
   }
 }

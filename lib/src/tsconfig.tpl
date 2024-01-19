@@ -1,6 +1,6 @@
 {
 
-  "extends": "@appril/dev/tsconfig.src.json",
+  "extends": "@appril/tsconfig/app-vue.json",
 
   "include": [
     "../**/*.d.ts",
