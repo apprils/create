@@ -3,10 +3,15 @@
   "extends": "@appril/dev/tsconfig.src.json",
 
   "include": [
-    "../env.d.ts",
-    "**/*",
-    "**/*.vue",
-    "**/*.d.ts"
+    "../**/*.d.ts",
+    "**/*.ts",
+    "**/*.vue"
+  ],
+
+  "exclude": [
+    {{#excludedSourceFolders}}
+    {{.}}
+    {{/excludedSourceFolders}}
   ],
 
   "compilerOptions": {
@@ -14,10 +19,10 @@
     "baseUrl": ".",
     "paths": {
       "~/*": [ "../*" ],
+      "@/*": [ "./*"  ],
       {{#aliases}}
-      "{{src}}/*": [ "{{dst}}/*" ],
+      {{.}}
       {{/aliases}}
-      "@/*": [ "./*" ]
     },
     "types": [
       "koa-bodyparser"

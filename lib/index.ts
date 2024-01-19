@@ -142,20 +142,41 @@ async function init() {
     await fsx.move(dstdir(a), dstdir(b))
   }
 
+  const sourceFolders: string[] = project.sourceFolders
+
+  const sourceFoldersMapper = (
+    render: (f: string, s: string) => string,
+    folders: string[] = sourceFolders,
+  ) => {
+    return folders.map(
+      (folder, i) => {
+        return render(
+          folder,
+          folders[i + 1]
+            ? ","
+            : ""
+        )
+      }
+    )
+  }
+
+  const context = {
+    project,
+    excludedSourceFolders: sourceFoldersMapper(
+      (folder, suffix) => `"${folder}"${suffix}`
+    ),
+    aliases: sourceFoldersMapper(
+      (folder, suffix) => `"${folder}/*": [ "${folder}/*" ]${suffix}`
+    ),
+  }
+
   for (const file of [
     ".gitignore",
     "package.json",
     "tsconfig.json",
   ].map((e) => dstdir(e))) {
-
     const template = await readFile(file, "utf8")
-
-    const context = {
-      project,
-    }
-
     await fsx.outputFile(file, render(template, context), "utf8")
-
   }
 
   for (const preset of project.presets) {
@@ -176,7 +197,7 @@ async function init() {
     get next() { return this.value += 2 },
   }
 
-  for (const dir of project.sourceFolders) {
+  for (const dir of sourceFolders) {
 
     await fsx.copy(srcdir("src"), dstdir(dir))
 
@@ -193,12 +214,20 @@ async function init() {
     const devPort = port.next
     const apiPort = port.next
 
-    const aliases = project.sourceFolders.map((src: string) => ({
-      src,
-      dst: src === dir
-        ? `.`
-        : `../${ src }`
-    }))
+    const baseContext = {
+      project,
+      devPort,
+      apiPort,
+      excludedSourceFolders: sourceFoldersMapper(
+        (folder, suffix) => `"../${folder}"${suffix}`,
+        sourceFolders.filter((f) => f !== dir)
+      ),
+      aliases: sourceFoldersMapper(
+        (folder, suffix) => folder === dir
+          ? `"${folder}/*": [ "./*" ]${suffix}`
+          : `"${folder}/*": [ "../${folder}/*" ]${suffix}`
+      ),
+    }
 
     for (const file of [
       "vite.config.ts",
@@ -209,15 +238,12 @@ async function init() {
 
       const template = await readFile(file, "utf8")
 
-      const baseurl = project.sourceFolders.length === 1 || /front|src/.test(dir)
+      const baseurl = sourceFolders.length === 1 || /front|src/.test(dir)
         ? "/"
         : join("/", dir.replace("@", ""))
 
       const context = {
-        project,
-        devPort,
-        apiPort,
-        aliases,
+        ...baseContext,
         src: {
           baseurl,
         },

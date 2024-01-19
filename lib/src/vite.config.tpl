@@ -15,6 +15,7 @@ import esbuildConfig from "../esbuild.config";
 import { baseurl } from "./config";
 import { distDir } from "../package.json";
 import { devPort } from "./package.json";
+import { compilerOptions } from "./tsconfig.json";
 
 export default defineConfig(() => {
 
@@ -62,13 +63,10 @@ export default defineConfig(() => {
     ],
 
     resolve: {
-      alias: {
-        "~": resolve(__dirname, ".."),
-        "@": resolve(__dirname),
-        {{#aliases}}
-        "{{src}}": resolve(__dirname, "{{dst}}"),
-        {{/aliases}}
-      }
+      alias: Object.entries(compilerOptions.paths).reduce((a, [k,v]) => ({
+        ...a,
+        [k.replace("/*", "")]: resolve(__dirname, v[0].replace("/*", ""))
+      }), {}),
     },
 
   }

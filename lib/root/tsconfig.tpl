@@ -3,26 +3,26 @@
   "extends": "@appril/dev/tsconfig.app.json",
 
   "include": [
-    "**/*",
-    "**/*.vue",
-    "./env.d.ts"
+    "**/*.d.ts",
+    "**/*.ts",
+    "**/*.vue"
   ],
 
   "exclude": [
-    {{#project.sourceFolders}}
-    "{{.}}",
-    {{/project.sourceFolders}}
-    "var"
+    "var",
+    {{#excludedSourceFolders}}
+    {{.}}
+    {{/excludedSourceFolders}}
   ],
 
   "compilerOptions": {
     "noEmit": true,
     "baseUrl": ".",
     "paths": {
-      {{#project.sourceFolders}}
-      "{{.}}/*": [ "{{.}}/*" ],
-      {{/project.sourceFolders}}
-      "~/*": [ "./*" ]
+      "~/*": [ "./*" ],
+      {{#aliases}}
+      {{.}}
+      {{/aliases}}
     },
     "types": [
       "node"
