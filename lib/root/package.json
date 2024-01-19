@@ -8,6 +8,7 @@
   "dependencies": {
     "@appril/core": "^0.0.0",
     "@appril/more": "^0.0.0",
+    "@koa/router": "^0.0.0",
     "nopt": "^0.0.0",
     "qs": "^0.0.0",
     "koa": "^0.0.0"
