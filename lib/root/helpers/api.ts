@@ -1,7 +1,7 @@
 
-import type { Env, Next } from "~/api";
+import type { Middleware } from "~/api/base";
 
-export async function errorHandler(env: Env, next: Next) {
+export const errorHandler: Middleware = async function errorHandler(ctx, next) {
 
   try {
     await next()
@@ -10,11 +10,11 @@ export async function errorHandler(env: Env, next: Next) {
 
     const [ code, message ] = extractCodeWithMessage(error)
 
-    env.status = code
-    env.body = { error: message }
+    ctx.status = code
+    ctx.body = { error: message }
 
     // triggering on("error") handler
-    env.app.emit("error", error, env)
+    ctx.app.emit("error", error, ctx)
 
   }
 
