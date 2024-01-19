@@ -16,9 +16,9 @@
   },
   "scripts": {
     "// ✨ build": "",
-    "esbundler": "func() { e=$1; shift; esbuild $e --bundle --platform=node --target=node20 --packages=external --loader:.tpl=text $*; }; func",
+    "esbundler": "func() { e=$1; shift; esbuild $e --bundle --platform=node --target=node20 --packages=external --sourcemap=inline --loader:.tpl=text $*; }; func",
     "prebuild": "rsync -av --delete --exclude '/*.ts' --exclude '/presets/*.ts' lib/ pkg",
-    "build": "npm run esbundler -- lib/index.ts --sourcemap=inline --outdir=pkg",
+    "build": "npm run esbundler -- lib/index.ts --outdir=pkg",
     "postbuild": "chmod +x pkg/index.js"
   },
   "release-it": {
