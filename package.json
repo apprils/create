@@ -16,8 +16,9 @@
   },
   "scripts": {
     "// ✨ build": "",
+    "esbundler": "func() { e=$1; shift; esbuild $e --bundle --platform=node --target=node20 --packages=external --loader:.tpl=text $*; }; func",
     "prebuild": "rsync -av --delete --exclude '/*.ts' --exclude '/presets/*.ts' lib/ pkg",
-    "build": "esbundler lib/index.ts --sourcemap=inline --outdir=pkg",
+    "build": "npm run esbundler -- lib/index.ts --sourcemap=inline --outdir=pkg",
     "postbuild": "chmod +x pkg/index.js"
   },
   "release-it": {
@@ -43,7 +44,6 @@
     "@appril/dbx": "^0.2.5",
     "@appril/dev": "^0.2.4",
     "@appril/more": "^0.2.5",
-    "@appril/scripts": "^0.2.4",
     "@types/fs-extra": "^11.0.4",
     "@types/koa__router": "^12.0.4",
     "@types/mustache": "^4.2.5",
