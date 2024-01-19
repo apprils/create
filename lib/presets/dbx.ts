@@ -9,7 +9,7 @@ export default async function(
   dst: string,
 ): Promise<void> {
 
-  const src = resolve(root, "dbtools")
+  const src = resolve(root, "dbx")
 
   await copyFiles(src, dst, {
     exclude: [ ".env", "package.json" ],

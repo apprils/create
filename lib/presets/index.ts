@@ -1,7 +1,7 @@
 
-import dbtools from "./dbtools";
+import dbx from "./dbx";
 
 export default {
-  "Database Tooling": dbtools,
+  "@appril/dbx": dbx,
 }
 
