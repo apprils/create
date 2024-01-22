@@ -35,7 +35,7 @@
   },
   "scripts": {
     "//✨ esbundler": "",
-    "preesbundler": "esbuild esbundler.ts --bundle --platform=node --target=node20 --packages=external --log-level=warning --outfile=var/.cache/esbundler.js",
+    "preesbundler": "esbuild esbundler.ts --bundle --platform=node --target=node20 --packages=external --log-level=warning --outdir=var/.cache",
     "esbundler": "func() { node --enable-source-maps var/.cache/esbundler $*; }; func",
     "//✨ trailing entry": ""
   }
