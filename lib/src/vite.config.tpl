@@ -11,7 +11,7 @@ import {
   vitePluginDefine,
 } from "@appril/dev";
 
-import esbuildConfig from "../esbuild.config";
+import esbuildConfig from "../esbundler.config";
 import { baseurl } from "./config";
 import { distDir } from "../package.json";
 import { devPort } from "./package.json";

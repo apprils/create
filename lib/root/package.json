@@ -34,6 +34,9 @@
     "vue-tsc": "^0.0.0"
   },
   "scripts": {
+    "//✨ esbundler": "",
+    "preesbundler": "esbuild esbundler.ts --bundle --platform=node --target=node20 --packages=external --outfile=var/.cache/esbundler.js",
+    "esbundler": "func() { node --enable-source-maps var/.cache/esbundler $*; }; func",
     "//✨ trailing entry": ""
   }
 }
