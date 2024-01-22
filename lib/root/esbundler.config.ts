@@ -7,5 +7,6 @@ export default {
   target: "node20",
   packages: "external",
   sourcemap: "inline",
+  logLevel: "info",
 } satisfies Omit<BuildOptions, "bundle"> & { bundle: true }
 
