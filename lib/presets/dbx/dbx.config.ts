@@ -9,7 +9,7 @@ export default defineConfig({
   connection,
   client,
 
-  base: "db",
+  base: "dbx",
 
   migrationDir: "migrations", // relative to base
 
