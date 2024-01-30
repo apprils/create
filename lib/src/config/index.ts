@@ -1,4 +1,2 @@
-
-export const baseurl = "{{src.baseurl}}"
-export const apiurl = "/api"
-
+export const baseurl = "{{src.baseurl}}";
+export const apiurl = "/api";

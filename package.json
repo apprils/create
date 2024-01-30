@@ -21,6 +21,7 @@
     "build": "npm run esbundler -- lib/index.ts --sourcemap=inline --outdir=pkg",
     "postbuild": "chmod +x pkg/index.js"
   },
+  "prettier": "@appril/prettier-config",
   "release-it": {
     "hooks": {
       "before:init": [
@@ -43,6 +44,7 @@
     "@appril/core": "^0.2.8",
     "@appril/dbx": "^0.2.6",
     "@appril/more": "^0.2.5",
+    "@appril/prettier-config": "^0.2.2",
     "@appril/tsconfig": "^0.2.2",
     "@types/fs-extra": "^11.0.4",
     "@types/koa__router": "^12.0.4",
@@ -53,6 +55,7 @@
     "@types/qs": "^6.9.11",
     "esbuild": "^0.19.11",
     "pinia": "^2.1.7",
+    "prettier": "^3.2.4",
     "release-it": "^17.0.1",
     "vite": "^5.0.12",
     "vue-router": "^4.2.5"

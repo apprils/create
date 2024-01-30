@@ -1,5 +1,1 @@
-
-index: {
-  env: true
-}
-
+index: { env: true }

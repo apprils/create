@@ -1,4 +1,3 @@
-
 import { type BuildOptions } from "esbuild";
 
 export default {
@@ -8,5 +7,4 @@ export default {
   packages: "external",
   sourcemap: "inline",
   logLevel: "info",
-} satisfies Omit<BuildOptions, "bundle"> & { bundle: true }
-
+} satisfies Omit<BuildOptions, "bundle"> & { bundle: true };

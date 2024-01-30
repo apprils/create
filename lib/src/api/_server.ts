@@ -1,4 +1,3 @@
-
 import { unlinkSync, chmodSync } from "fs";
 
 import nopt from "nopt";
@@ -7,31 +6,35 @@ import "~/init";
 
 import { app } from "./_app";
 
-const { port, sock } = nopt({
-  port: Number,
-  sock: String,
-}, {
-  p: [ "--port" ],
-  s: [ "--sock" ],
-})
+const { port, sock } = nopt(
+  {
+    port: Number,
+    sock: String,
+  },
+  {
+    p: ["--port"],
+    s: ["--sock"],
+  },
+);
 
 if (!port && !sock) {
-  throw new Error("Please provide either --port/-p number or --sock/-s path")
+  throw new Error("Please provide either --port/-p number or --sock/-s path");
 }
 
-process.stdout.write(`\n\tStarting Server [ ${ port ? "port" : "socket" }: ${ port || sock } ]... `)
+process.stdout.write(
+  `\n\tStarting Server [ ${port ? "port" : "socket"}: ${port || sock} ]... `,
+);
 
 if (sock) {
-  try { unlinkSync(sock) } catch(e) {}
+  try {
+    unlinkSync(sock);
+  } catch (e) {}
 }
 
-app.listen(port || sock, function() {
-
+app.listen(port || sock, function () {
   if (sock) {
-    chmodSync(sock, 0o777)
+    chmodSync(sock, 0o777);
   }
 
-  console.log("\n\t✨ Server Started\n")
-
-})
-
+  console.log("\n\t✨ Server Started\n");
+});

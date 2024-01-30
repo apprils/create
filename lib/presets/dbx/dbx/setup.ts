@@ -1,11 +1,9 @@
-
 import { knex } from "knex";
 
 import { DEV } from "~/config";
 import { connection as connectionSettings, client } from "~/config/knex";
 
 export function connect(_connectionSettings = {}) {
-
   const instance = knex({
     client,
     connection: {
@@ -14,21 +12,17 @@ export function connect(_connectionSettings = {}) {
     },
     asyncStackTraces: DEV,
     pool: {
-
       async afterCreate(conn: any, done: Function) {
-        done(null, conn)
+        done(null, conn);
       },
-
     },
-  })
+  });
 
-  return instance
-
+  return instance;
 }
 
 export function disconnect(c = connection) {
-  return c?.destroy()
+  return c?.destroy();
 }
 
-export const connection = connect()
-
+export const connection = connect();

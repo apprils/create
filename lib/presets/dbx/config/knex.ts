@@ -1,4 +1,3 @@
-
 const {
   DATABASE_SERVER: host,
   DATABASE_PORT: port,
@@ -6,7 +5,7 @@ const {
   DATABASE_NAME: database,
   DATABASE_PASSWORD: password,
   DATABASE_CLIENT: client = "pg",
-} = process.env
+} = process.env;
 
 export const connection = {
   host,
@@ -14,7 +13,6 @@ export const connection = {
   user,
   database,
   password,
-}
+};
 
-export { client }
-
+export { client };

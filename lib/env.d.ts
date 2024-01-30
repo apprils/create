@@ -1,6 +1,5 @@
-
 declare module "~/init" {
-  export {}
+  export {};
 }
 
 declare module "~/config" {
@@ -19,10 +18,10 @@ declare module "~/api/_server_assets" {
 }
 
 declare module "~/api/base" {
-  export {}
+  export type Middleware = (ctx: any, next: any) => void;
+  export {};
 }
 
 declare module "@/package.json" {
   export const apiPort: number;
 }
-
