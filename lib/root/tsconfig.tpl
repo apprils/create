@@ -3,7 +3,6 @@
   "extends": "@appril/tsconfig/app.json",
 
   "include": [
-    "**/*.d.ts",
     "**/*.ts",
     "**/*.vue"
   ],
