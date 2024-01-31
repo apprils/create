@@ -1,12 +1,11 @@
-import type { Middleware } from "@appril/core/router";
-import { use } from "@appril/core/router";
+import { type Middleware, use } from "@appril/core/router";
 
-import type {
-  JsonOptions,
-  FormOptions,
-  RawOptions,
+import {
+  type JsonOptions,
+  type FormOptions,
+  type RawOptions,
+  bodyparser,
 } from "@appril/core/bodyparser";
-import { bodyparser } from "@appril/core/bodyparser";
 
 export * from "@appril/core/router";
 
