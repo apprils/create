@@ -147,6 +147,7 @@ async function init() {
 
   const context = {
     project,
+    sourceFolders,
     excludedSourceFolders: sourceFoldersMapper(
       (folder, suffix) => `"${folder}"${suffix}`,
     ),

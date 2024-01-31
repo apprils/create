@@ -37,6 +37,8 @@
     "//✨ esbundler": "",
     "preesbundler": "esbuild esbundler.ts --bundle --platform=node --target=node20 --packages=external --log-level=warning --outdir=var/.cache",
     "esbundler": "func() { node --enable-source-maps var/.cache/esbundler $*; }; func",
+    "//✨ type checker": "",
+    "tsc": "set -e; for d in . {{#sourceFolders}} {{.}}{{/sourceFolders}}; do tsc -p $d/tsconfig.json; done",
     "//✨ trailing entry": ""
   }
 }
