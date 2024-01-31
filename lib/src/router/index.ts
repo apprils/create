@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import type { RouteRecordRaw } from "vue-router";
 
-import useEnvStore from "@/stores/env";
+import useEnvStore from "../stores/env";
 
 import "./_routes.d";
 import _routes from "./_routes";

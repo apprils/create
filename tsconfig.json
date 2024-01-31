@@ -2,5 +2,9 @@
   "extends": "@appril/tsconfig/lib.json",
   "include": [
     "lib"
-  ]
+  ],
+  "compilerOptions": {
+    "emitDeclarationOnly": false,
+    "noEmit": true
+  }
 }

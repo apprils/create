@@ -22,6 +22,10 @@ declare module "~/api/base" {
   export {};
 }
 
+declare module "~/helpers/api" {
+  export function errorHandler() {}
+}
+
 declare module "@/package.json" {
   export const apiPort: number;
 }
