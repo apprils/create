@@ -1,4 +1,6 @@
 {
   "extends": "@appril/tsconfig/lib.json",
-  "include": ["."],
+  "include": [
+    "lib"
+  ]
 }
