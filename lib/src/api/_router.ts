@@ -10,6 +10,14 @@ import routes from "./_routes";
 // default bodyparser
 config.use(["post", "put", "patch"], [{ bodyparser: bodyparser.json() }]);
 
+config.use((ctx, next) => {
+  // prettier-ignore
+  ctx.payload = "body" in ctx.request
+    ? ctx.request.body || {}
+    : ctx.query;
+  return next();
+});
+
 export const router = new Router({
   prefix: join(baseurl, apiurl),
 });
