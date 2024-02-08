@@ -15,10 +15,12 @@
     "create": "pkg/index.js"
   },
   "scripts": {
+    "// ✨ lint": "",
+    "lint": "biome lint ./lib",
     "// ✨ build": "",
     "esbundler": "func() { e=$1; shift; esbuild $e --bundle --platform=node --target=node20 --packages=external --loader:.tpl=text $*; }; func",
     "prebuild": "rsync -av --delete --exclude '/*.ts' --exclude '/presets/*.ts' lib/ pkg",
-    "build": "npm run esbundler -- lib/index.ts --sourcemap=inline --outdir=pkg",
+    "build": "set -e; npm run lint; npm run esbundler -- lib/index.ts --sourcemap=inline --outdir=pkg",
     "postbuild": "chmod +x pkg/index.js"
   },
   "prettier": "@appril/prettier-config",
@@ -26,10 +28,6 @@
     "hooks": {
       "before:init": [
         "npm run build"
-      ],
-      "after:release": [
-        "mkdir -p var/pub",
-        "npm pack --pack-destination var/pub"
       ]
     }
   },
@@ -44,8 +42,8 @@
     "@appril/core": "^0.2.8",
     "@appril/dbx": "^0.2.7",
     "@appril/more": "^0.2.6",
-    "@appril/prettier-config": "^0.2.2",
     "@appril/tsconfig": "^0.2.3",
+    "@biomejs/biome": "^1.5.3",
     "@types/fs-extra": "^11.0.4",
     "@types/koa__router": "^12.0.4",
     "@types/mustache": "^4.2.5",
@@ -55,7 +53,6 @@
     "@types/qs": "^6.9.11",
     "esbuild": "^0.20.0",
     "pinia": "^2.1.7",
-    "prettier": "^3.2.4",
     "release-it": "^17.0.3",
     "vite": "^5.0.12",
     "vue-router": "^4.2.5"
