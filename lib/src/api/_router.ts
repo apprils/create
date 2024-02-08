@@ -11,10 +11,11 @@ import routes from "./_routes";
 config.use(["post", "put", "patch"], [{ bodyparser: bodyparser.json() }]);
 
 config.use((ctx, next) => {
-  // prettier-ignore
-  ctx.payload = "body" in ctx.request
-    ? ctx.request.body || {}
-    : ctx.query;
+  Object.defineProperty(ctx, "payload", {
+    get() {
+      return "body" in ctx.request ? ctx.request.body || {} : ctx.query;
+    },
+  });
   return next();
 });
 
