@@ -2,12 +2,11 @@ import Koa from "koa";
 import withQueryparser from "@appril/core/queryparser";
 
 import { errorHandler } from "~/helpers/api";
-import { router } from "./_router";
+import routes from "./_routes";
 
 export const app = withQueryparser(new Koa());
 
 app.on("error", console.error);
 
 app.use(errorHandler);
-
-app.use(router.routes());
+app.use(routes);

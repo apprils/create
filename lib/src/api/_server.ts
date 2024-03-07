@@ -31,7 +31,7 @@ if (sock) {
   } catch (e) {}
 }
 
-app.listen(port || sock, function () {
+app.listen(port || sock, () => {
   if (sock) {
     chmodSync(sock, 0o777);
   }
