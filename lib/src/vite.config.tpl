@@ -7,69 +7,75 @@ import vuePlugin from "@vitejs/plugin-vue";
 import checkerPlugin from "vite-plugin-checker";
 
 import {
-  vitePluginApprilApi, vitePluginApprilViews,
-  vitePluginDefine,
+  apiGeneratorPlugin,
+  apiHandlerPlugin,
+  apiAssetsPlugin,
+  fetchGeneratorPlugin,
+  viewsGeneratorPlugin,
+  definePlugin,
 } from "@appril/dev";
 
-import esbuildConfig from "../esbundler.config";
+import esbuildConfig from "../esbuild.config";
 import { baseurl } from "./config";
 import { distDir } from "../package.json";
 import { devPort } from "./package.json";
 import { compilerOptions } from "./tsconfig.json";
 
-export default defineConfig(() => {
+export default defineConfig({
 
-  return {
+  base: join(baseurl, "/"),
 
-    base: join(baseurl, "/"),
+  build: {
+    outDir: resolve(__dirname, join("..", distDir, basename(__dirname))),
+    emptyOutDir: true,
+    sourcemap: true,
+  },
 
-    build: {
-      outDir: resolve(__dirname, join("..", distDir, basename(__dirname))),
-      emptyOutDir: true,
-      sourcemap: true,
+  server: {
+    host: true,
+    port: devPort,
+    strictPort: true,
+    fs: {
+      strict: false,
     },
+  },
 
-    server: {
-      host: true,
-      port: devPort,
-      strictPort: true,
-      fs: {
-        strict: false,
+  cacheDir: resolve(__dirname, `../var/.cache/${basename(__dirname)}`),
+
+  plugins: [
+
+    vuePlugin(),
+
+    checkerPlugin({
+      vueTsc: true,
+    }),
+
+    apiGeneratorPlugin(),
+
+    apiHandlerPlugin({ esbuildConfig }),
+
+    apiAssetsPlugin(),
+
+    fetchGeneratorPlugin(),
+
+    viewsGeneratorPlugin(),
+
+    definePlugin([
+      {
+        keys: [ "NODE_ENV" ],
       },
-    },
+    ]),
 
-    cacheDir: `../var/.cache/vite/${ basename(__dirname) }`,
+  ],
 
-    plugins: [
-
-      vuePlugin(),
-
-      checkerPlugin({
-        vueTsc: true,
-      }),
-
-      vitePluginApprilViews(),
-
-      vitePluginApprilApi({
-        esbuildConfig,
-      }),
-
-      vitePluginDefine([
-        {
-          keys: [ "NODE_ENV" ],
-        },
-      ]),
-
-    ],
-
-    resolve: {
-      alias: Object.entries(compilerOptions.paths).reduce((a, [k,v]) => ({
-        ...a,
-        [k.replace("/*", "")]: resolve(__dirname, v[0].replace("/*", ""))
-      }), {}),
-    },
-
-  }
+  resolve: {
+    alias: Object.entries(compilerOptions.paths).reduce(
+      (map: Record<string, string>, [k, v]) => {
+        map[k.replace("/*", "")] = resolve(__dirname, v[0].replace("/*", ""));
+        return map;
+      },
+      {},
+    ),
+  },
 
 })
-
