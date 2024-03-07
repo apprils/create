@@ -4,7 +4,6 @@
     "lib"
   ],
   "compilerOptions": {
-    "emitDeclarationOnly": false,
     "noEmit": true
   }
 }
