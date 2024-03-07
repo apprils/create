@@ -15,7 +15,6 @@
   ],
 
   "compilerOptions": {
-    "noEmit": true,
     "baseUrl": ".",
     "paths": {
       "~/*": [ "../*" ],
