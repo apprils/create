@@ -18,12 +18,11 @@ declare module "~/api/_server_assets" {
 }
 
 declare module "~/api/base" {
-  export type Middleware = (ctx: any, next: any) => void;
   export {};
 }
 
 declare module "~/helpers/api" {
-  export function errorHandler() {}
+  export const errorHandler = () => {};
 }
 
 declare module "@/package.json" {

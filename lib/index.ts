@@ -12,7 +12,7 @@ import prompts from "prompts";
 import { render } from "./render";
 import presets from "./presets";
 
-const onState: PromptObject["onState"] = function (state) {
+const onState: PromptObject["onState"] = (state) => {
   if (state.aborted) {
     process.nextTick(() => process.exit(0));
   }
@@ -137,10 +137,10 @@ async function init() {
   const sourceFolders: string[] = project.sourceFolders;
 
   const sourceFoldersMapper = (
-    render: (f: string, s: string) => string,
+    render: (f: string, s: string) => string[],
     folders: string[] = sourceFolders,
   ) => {
-    return folders.map((folder, i) => {
+    return folders.flatMap((folder, i) => {
       return render(folder, folders[i + 1] ? "," : "");
     });
   };
@@ -148,12 +148,12 @@ async function init() {
   const context = {
     project,
     sourceFolders,
-    excludedSourceFolders: sourceFoldersMapper(
-      (folder, suffix) => `"${folder}"${suffix}`,
-    ),
-    aliases: sourceFoldersMapper(
-      (folder, suffix) => `"${folder}/*": [ "${folder}/*" ]${suffix}`,
-    ),
+    excludedSourceFolders: sourceFoldersMapper((folder, suffix) => [
+      `"${folder}"${suffix}`,
+    ]),
+    aliases: sourceFoldersMapper((folder, suffix) => [
+      `"${folder}/*": [ "${folder}/*" ]${suffix}`,
+    ]),
   };
 
   for (const file of [".gitignore", "package.json", "tsconfig.json"].map((e) =>
@@ -179,7 +179,8 @@ async function init() {
   const port = {
     value: project.devPort - 2,
     get next() {
-      return (this.value += 2);
+      this.value += 2;
+      return this.value;
     },
   };
 
@@ -202,13 +203,13 @@ async function init() {
       devPort,
       apiPort,
       excludedSourceFolders: sourceFoldersMapper(
-        (folder, suffix) => `"../${folder}"${suffix}`,
+        (folder, suffix) => [`"../${folder}"${suffix}`],
         sourceFolders.filter((f) => f !== dir),
       ),
       aliases: sourceFoldersMapper((folder, suffix) =>
         folder === dir
-          ? `"${folder}/*": [ "./*" ]${suffix}`
-          : `"${folder}/*": [ "../${folder}/*" ]${suffix}`,
+          ? [`"${folder}/*": [ "./*" ]${suffix}`]
+          : [`"${folder}/*": [ "../${folder}/*" ]${suffix}`],
       ),
     };
 
