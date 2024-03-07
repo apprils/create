@@ -11,7 +11,9 @@
     "@koa/router": "^0.0.0",
     "nopt": "^0.0.0",
     "qs": "^0.0.0",
-    "koa": "^0.0.0"
+    "koa": "^0.0.0",
+    "zod": "^0.0.0",
+    "zod-validation-error": "^0.0.0"
   },
   "devDependencies": {
     "@appril/dev": "^0.0.0",
@@ -23,6 +25,7 @@
     "@types/nopt": "^0.0.0",
     "@vitejs/plugin-vue": "^0.0.0",
     "@vue/tsconfig": "^0.0.0",
+    "@vueuse/core": "^0.0.0",
     "esbuild": "^0.0.0",
     "pinia": "^0.0.0",
     "tslib": "^0.0.0",
