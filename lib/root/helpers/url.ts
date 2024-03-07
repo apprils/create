@@ -1,6 +1,6 @@
 import qs from "qs";
 
-export type PathChunk = string | number | Record<string, any>;
+export type PathChunk = string | number | Record<string, unknown>;
 
 export type URLMapperConfig = {
   hostname: string;
@@ -11,17 +11,22 @@ export type URLMapperConfig = {
 export function urlMapper(
   config: URLMapperConfig,
   options: { base: string },
-  setup: { name: string; path: string } & Record<string, any>,
+  setup: { name: string; path: string } & Record<string, unknown>,
 ) {
   const { hostname = "", secure = false, w3prefix = false } = { ...config };
 
   const scheme = secure ? "https://" : "http://";
 
-  const origin = w3prefix ? scheme + "www." + hostname : scheme + hostname;
+  const origin = w3prefix
+    ? [scheme, "www.", hostname].join("")
+    : [scheme, hostname].join("");
 
   const base = join(options.base, setup.path);
-  const path = (...args: PathChunk[]) =>
-    urlBuilder(options.base, setup.path, ...args);
+
+  const path = (...args: PathChunk[]) => {
+    return urlBuilder(options.base, setup.path, ...args);
+  };
+
   const href = (...args: PathChunk[]) => origin + path(...args);
 
   return {
@@ -40,18 +45,20 @@ export function urlMapper(
 }
 
 export function urlBuilder(...args: PathChunk[]): string {
-  return typeof args[args.length - 1] === "object"
-    ? join(...args.slice(0, args.length - 1)) +
-        "?" +
-        stringify(args[args.length - 1] as {})
-    : join(...args);
+  if (typeof args[args.length - 1] === "object") {
+    const path = join(...args.slice(0, args.length - 1));
+    const query = stringify(args[args.length - 1] as Record<string, unknown>);
+    return [path, query].join("?");
+  }
+
+  return join(...args);
 }
 
-export function parse(str: string): { [key: string]: any } {
+export function parse(str: string): Record<string, unknown> {
   return qs.parse(str);
 }
 
-export function stringify(query: { [key: string]: any }, opts = {}): string {
+export function stringify(query: Record<string, unknown>, opts = {}): string {
   return qs.stringify(query, {
     arrayFormat: "brackets",
     indices: false,
