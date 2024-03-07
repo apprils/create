@@ -12,7 +12,8 @@ export function connect(_connectionSettings = {}) {
     },
     asyncStackTraces: DEV,
     pool: {
-      async afterCreate(conn: any, done: Function) {
+      // biome-ignore lint:
+      async afterCreate(conn: any, done: (...a: unknown[]) => void) {
         done(null, conn);
       },
     },
