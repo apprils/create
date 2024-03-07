@@ -37,11 +37,11 @@
     "vue-tsc": "^0.0.0"
   },
   "scripts": {
-    "//✨ esbundler": "",
-    "preesbundler": "esbuild esbundler.ts --bundle --platform=node --target=node20 --packages=external --log-level=warning --outdir=var/.cache",
-    "esbundler": "func() { node --enable-source-maps var/.cache/esbundler $*; }; func",
+    "//✨ esbuilder": "",
+    "preesbuilder": "esbuild esbuilder.ts --bundle --platform=node --target=node20 --packages=external --log-level=warning --outdir=var/.cache",
+    "esbuilder": "node --enable-source-maps var/.cache/esbuilder $*",
     "//✨ type checker": "",
-    "tsc": "set -e; for d in . {{#sourceFolders}} {{.}}{{/sourceFolders}}; do tsc -p $d/tsconfig.json; done",
+    "tsc": "set -e; for d in . {{#sourceFolders}} {{.}}{{/sourceFolders}}; do tsc -p $d/tsconfig.json --noEmit; done",
     "//✨ trailing entry": ""
   }
 }
